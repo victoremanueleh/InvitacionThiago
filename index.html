@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Mis 3 Añitos! - Thiago 🐾</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paw-blue: #005aab;
+            --paw-lightblue: #29b6f6;
+            --paw-red: #ef4136;
+            --paw-yellow: #f9a01b;
+            --paw-green: #4caf50;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            /* Fondo dinámico inspirado en la imagen: Cielo soleado que baja a pasto verde */
+            background: linear-gradient(to bottom, #4fc3f7 0%, #b3e5fc 40%, #81c784 70%, #4caf50 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- EFECTO DE HUELLAS VOLADORAS DE FONDO --- */
+        body::before {
+            content: "🐾";
+            position: absolute;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.25);
+            top: 10%;
+            left: 5%;
+            animation: float 6s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            content: "🦴";
+            position: absolute;
+            font-size: 3.5rem;
+            color: rgba(255, 255, 255, 0.3);
+            bottom: 15%;
+            right: 5%;
+            animation: float 5s ease-in-out infinite alternate-reverse;
+        }
+
+        /* --- CONTENEDOR PRINCIPAL SMARTPHONE STYLE --- */
+        .invitation-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 440px;
+            border-radius: 35px;
+            border: 10px solid var(--paw-yellow);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- ENCABEZADO AZUL CON CHASE --- */
+        .card-header {
+            background: radial-gradient(circle, #0288d1 0%, var(--paw-blue) 100%);
+            padding: 30px 20px 20px 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 6px solid var(--paw-yellow);
+        }
+
+        /* Título Principal */
+        .main-title {
+            font-family: 'Fredoka One', cursive;
+            color: #ffffff;
+            font-size: 2.5rem;
+            line-height: 1.1;
+            text-shadow: 3px 3px 0px var(--paw-red), -2px -2px 0px var(--paw-blue), 4px 4px 5px rgba(0,0,0,0.4);
+            margin-bottom: 5px;
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Personaje Chase Flotando arriba */
+        .chase-img {
+            width: 120px;
+            height: auto;
+            margin-top: -10px;
+            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.3));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* --- SECCIÓN ENTRADA INVITADO (ZONA DEL NOMBRE) --- */
+        .guest-box {
+            background: #fff3e0;
+            margin: 15px;
+            padding: 12px;
+            border-radius: 20px;
+            border: 3px dashed var(--paw-red);
+            text-align: center;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .guest-tag {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 900;
+            color: var(--paw-red);
+            margin-bottom: 3px;
+        }
+
+        .guest-name {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.6rem;
+            color: var(--paw-blue);
+            text-shadow: 1px 1px 0px #fff;
+            word-wrap: break-word;
+        }
+
+        /* --- CUERPO DE DATOS DE LA INVITACIÓN --- */
+        .card-body {
+            padding: 10px 20px 20px 20px;
+        }
+
+        /* Filas de Información */
+        .info-row {
+            display: flex;
+            align-items: center;
+            background: #f4f9fd;
+            margin-bottom: 12px;
+            padding: 12px;
+            border-radius: 20px;
+            border-left: 6px solid var(--paw-blue);
+            transition: transform 0.2s;
+        }
+
+        .info-row:hover {
+            transform: scale(1.02);
+        }
+
+        /* Escudos Circulares de Colores */
+        .badge-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            flex-shrink: 0;
+            color: white;
+        }
+
+        /* Asignación de colores a los escudos igual que tu imagen */
+        .row-evento .badge-icon { background-color: var(--paw-yellow); border: 2px solid white; }
+        .row-fecha .badge-icon { background-color: var(--paw-blue); border: 2px solid white; }
+        .row-hora .badge-icon { background-color: var(--paw-green); border: 2px solid white; }
+        .row-lugar .badge-icon { background-color: var(--paw-red); border: 2px solid white; }
+
+        .info-text h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #777;
+            font-weight: 900;
+        }
+
+        .info-text p {
+            font-size: 1.1rem;
+            color: #222;
+            font-weight: 700;
+        }
+
+        /* --- BOTÓN DE ASISTENCIA --- */
+        .btn-confirm {
+            display: block;
+            text-align: center;
+            background: linear-gradient(to bottom, #ff5722, var(--paw-red));
+            color: white;
+            text-decoration: none;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+            padding: 15px;
+            border-radius: 25px;
+            margin-top: 15px;
+            border: 4px solid var(--paw-yellow);
+            box-shadow: 0 6px 15px rgba(239, 65, 54, 0.4);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            animation: pulse 2s infinite;
+        }
+
+        /* --- PANEL DE EDICIÓN FLOTANTE / INFERIOR --- */
+        .editor-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 15px;
+            width: 100%;
+            max-width: 440px;
+            margin-top: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 3px solid var(--paw-blue);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .editor-panel label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--paw-blue);
+        }
+
+        .editor-panel input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid #ccc;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            text-align: center;
+            font-weight: 700;
+            outline: none;
+        }
+
+        .editor-panel input:focus {
+            border-color: var(--paw-red);
+        }
+
+        /* --- ANIMACIONES DIVERSIFICADAS --- */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.04); box-shadow: 0 8px 20px rgba(239, 65, 54, 0.6); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive para pantallas muy pequeñas */
+        @media (max-width: 380px) {
+            .main-title { font-size: 2rem; }
+            .guest-name { font-size: 1.3rem; }
+            .info-text p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invitation-card">
+        
+        <div class="card-header">
+            <h1 class="main-title">¡MIS 3<br>AÑITOS!</h1>
+            <img src="https://i.ibb.co/LdrP4rY/chase-paw.png" alt="Chase Paw Patrol" class="chase-img">
+        </div>
+
+        <div class="guest-box">
+            <p class="guest-tag">🐾 Invitado de Honor 🐾</p>
+            <h2 class="guest-name" id="displayGuest">¡Familia Especial!</h2>
+        </div>
+
+        <div class="card-body">
+            
+            <div class="info-row row-evento">
+                <div class="badge-icon">🍖</div>
+                <div class="info-text">
+                    <h4>Evento</h4>
+                    <p>Almuerzo Familiar</p>
+                </div>
+            </div>
+
+            <div class="info-row row-fecha">
+                <div class="badge-icon">📅</div>
+                <div class="info-text">
+                    <h4>Fecha</h4>
+                    <p>Sábado, 30 de Mayo</p>
+                </div>
+            </div>
+
+            <div class="info-row row-hora">
+                <div class="badge-icon">⏰</div>
+                <div class="info-text">
+                    <h4>Hora</h4>
+                    <p>12:00 PM (Mediodía)</p>
+                </div>
+            </div>
+
+            <div class="info-row row-lugar">
+                <div class="badge-icon">📍</div>
+                <div class="info-text">
+                    <h4>Lugar</h4>
+                    <p>Nuestra Casa (Calle Falsa 123)</p>
+                </div>
+            </div>
+
+            <a href="https://wa.me/591XXXXXXXX?text=¡Hola!%20Confirmamos%20nuestra%20asistencia%20al%20almuerzo%20de%203%20años%20de%20Thiago%20🐾" class="btn-confirm" target="_blank" id="whatsappBtn">
+                CONFIRMAR ASISTENCIA
+            </a>
+
+        </div>
+    </div>
+
+    <div class="editor-panel">
+        <label for="nameInput">⚙️ Panel de Control: Cambiar nombre del Invitado</label>
+        <input type="text" id="nameInput" placeholder="Ej: Tíos Pérez o Abuelitos" oninput="liveUpdate()">
+    </div>
+
+    <script>
+        function liveUpdate() {
+            // Capturamos el valor que se escribe
+            var currentInput = document.getElementById("nameInput").value;
+            var nameDisplay = document.getElementById("displayGuest");
+            var whatsappLink = document.getElementById("whatsappBtn");
+
+            // Si está vacío, reponer texto predeterminado
+            if (currentInput.trim() === "") {
+                nameDisplay.innerText = "¡Familia Especial!";
+                // Link base de WhatsApp
+                whatsappLink.href = "https://wa.me/591XXXXXXXX?text=¡Hola!%20Confirmamos%20nuestra%20asistencia%20al%20almuerzo%20de%203%20años%20de%20Thiago%20🐾";
+            } else {
+                nameDisplay.innerText = currentInput;
+                // Modifica dinámicamente el mensaje de WhatsApp para que diga quién confirma
+                var encodedMessage = encodeURIComponent("¡Hola! " + currentInput + " confirmamos nuestra asistencia al almuerzo de 3 años de Thiago 🐾");
+                whatsappLink.href = "https://wa.me/591XXXXXXXX?text=" + encodedMessage;
+            }
+        }
+    </script>
+
+</body>
+</html>
